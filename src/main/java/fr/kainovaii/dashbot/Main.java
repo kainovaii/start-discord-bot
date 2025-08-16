@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.reflections.Reflections;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.List;
 import java.util.Set;
@@ -15,8 +16,14 @@ import java.util.stream.Collectors;
 public class Main
 {
     public static void main(String[] args) throws Exception
-    {
         String DISCORD_TOKEN = "YOUR_SAFE_PLACEHOLDER";
+        Dotenv dotenv = Dotenv.configure().directory("../").load();
+        String token = dotenv.get("DISCORD_TOKEN");
+
+        if (token == null || token.isEmpty()) {
+            throw new IllegalStateException("Le token Discord n'a pas été trouvé !");
+        }
+
         Reflections reflections = new Reflections("fr.kainovaii.dashbot.commands");
         Set<Class<? extends Command>> commandClasses = reflections.getSubTypesOf(Command.class);
 
