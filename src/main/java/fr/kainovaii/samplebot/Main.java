@@ -1,7 +1,7 @@
-package fr.kainovaii.dashbot;
+package fr.kainovaii.samplebot;
 
-import fr.kainovaii.dashbot.commands.Command;
-import fr.kainovaii.dashbot.listeners.SlashCommandListener;
+import fr.kainovaii.samplebot.commands.Command;
+import fr.kainovaii.samplebot.listeners.SlashCommandListener;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.Activity;
@@ -35,7 +35,7 @@ public class Main
 
     private static List<Command> loadCommands()
     {
-        Reflections reflections = new Reflections("fr.kainovaii.dashbot.commands");
+        Reflections reflections = new Reflections("fr.kainovaii.samplebot.commands");
         Set<Class<? extends Command>> commandClasses = reflections.getSubTypesOf(Command.class);
 
         return commandClasses.stream()
@@ -65,7 +65,7 @@ public class Main
     private static void configurePresence(JDA jda)
     {
         jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
-        jda.getPresence().setActivity(Activity.watching("kainovaii.cloud"));
+        jda.getPresence().setActivity(Activity.watching("github.com/kainovaii"));
     }
 
     private static void registerGuildCommands(JDA jda, long guildId, List<Command> commands)

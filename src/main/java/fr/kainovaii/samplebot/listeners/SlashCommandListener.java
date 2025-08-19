@@ -1,6 +1,6 @@
-package fr.kainovaii.dashbot.listeners;
+package fr.kainovaii.samplebot.listeners;
 
-import fr.kainovaii.dashbot.commands.Command;
+import fr.kainovaii.samplebot.commands.Command;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

@@ -1,4 +1,4 @@
-package fr.kainovaii.dashbot.commands;
+package fr.kainovaii.samplebot.commands;
 
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;

@@ -85,7 +85,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>fr.kainovaii.SampleBot.Main</mainClass>
+              <mainClass>fr.kainovaii.samplebot.Main</mainClass>
             </manifest>
           </archive>
         </configuration>
