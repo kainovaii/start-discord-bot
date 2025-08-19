@@ -1,9 +1,7 @@
 package fr.kainovaii.dashbot;
 
 import fr.kainovaii.dashbot.commands.Command;
-import fr.kainovaii.dashbot.listeners.ButtonListener;
 import fr.kainovaii.dashbot.listeners.SlashCommandListener;
-import fr.kainovaii.dashbot.webhook.UptimeKumaWebhook;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.Activity;
@@ -25,7 +23,6 @@ public class Main
         dotenv = loadEnv();
 
         String token = getEnv("DISCORD_TOKEN");
-        long channelId = Long.parseLong(getEnv("CHANNEL_ID"));
         long guildId = Long.parseLong(getEnv("GUILD_ID"));
 
         List<Command> commands = loadCommands();
@@ -33,7 +30,6 @@ public class Main
         JDA jda = buildJDA(token, commands);
 
         configurePresence(jda);
-        startWebhook(jda, channelId);
         registerGuildCommands(jda, guildId, commands);
     }
 
@@ -59,10 +55,7 @@ public class Main
     private static JDA buildJDA(String token, List<Command> commands) throws InterruptedException
     {
         JDABuilder builder = JDABuilder.createDefault(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
-        .addEventListeners(
-                new SlashCommandListener(commands),
-                new ButtonListener()
-        );
+        .addEventListeners(new SlashCommandListener(commands));
 
         JDA jda = builder.build();
         jda.awaitReady();
@@ -73,12 +66,6 @@ public class Main
     {
         jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
         jda.getPresence().setActivity(Activity.watching("kainovaii.cloud"));
-    }
-
-    private static void startWebhook(JDA jda, long channelId)
-    {
-        new UptimeKumaWebhook(jda, channelId);
-        System.out.println("Serveur webhook Uptime Kuma démarré !");
     }
 
     private static void registerGuildCommands(JDA jda, long guildId, List<Command> commands)
